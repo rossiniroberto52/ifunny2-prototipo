@@ -1,4 +1,3 @@
-
 const express = require('express')
 const app = express();
 const path = require('path')
@@ -11,8 +10,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         console.log(file)
-        cb(null, date.now() + path.extname(file.originalname))
-
+        cb(null, Date.now() + path.extname(file.originalname))
     }
 })
 
@@ -27,6 +25,10 @@ app.get('/upload', (req,res) => {
 app.post('/upload', upload.single('image'), (req,res) => {
     res.send("meme uploaded");
 });
+
+app.get('/site', (req,res) => {
+    res.send(__dirname + "./index.html")
+})
 
 app.listen(3001);
 console.log('3001 é a porta do sv!')
