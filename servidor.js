@@ -9,4 +9,4 @@ app.use('/', (req,res) => {
     res.send('ola')
 })
 
-app.listen(port, () => {console.log('Servidor Rodando')})
+app.listen(port, () => {console.log('Servidor Rodando')});
