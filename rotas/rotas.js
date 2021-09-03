@@ -1,26 +1,27 @@
 const express = require('express');
 const rotas = express.Router()
+const arquivo = require('../servidor')
 
-let urlInfo=[
-    {'tipo':'login','info':'login'},
-    {'tipo':'register','info':'registrar'},
-    {'tipo':'acessar','info':'Curso de typescript'}
-];
+function processosARQV() {
+    var nomeExt = arquivo.name;
 
-rotas.get('/', (req, res)=>{
-    res.json({ola:'seja bem vindo'})
-});
-
-rotas.get('/:tipoid', (req, res)=>{
-    const tipo = req.params.cursoid;
-    const tipoI = urlInfo.find(i=>i.tipo == tipo);
-    if(!tipoI){
-        res.status(404).json(
-            {error:'tipo encontrado',tipoPesquisado:tipo}
-        )
-    }else{
-        res.status(200).json(tipoI)
-    }
-});
+    var nome = nomeExt.substr(0, nomeExt.lastIndexOf('.')) || nomeExt;
+}
 
 module.exports = rotas;
+
+
+
+/*function processarArquivo(arquivo){
+    var nomeExt = arquivo.name; 
+    
+    var nome = nomeExt.substr(0, nomeExt.lastIndexOf('.')) || nomeExt;
+    console.log(nome);
+}
+
+function processarArquivos(e) {
+   var arquivos= e.files; 
+   for (var i = 0; i < arquivos.length; i++) {
+        processarArquivo(arquivos[i]);
+   }
+}*/

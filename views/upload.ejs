@@ -1,10 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<head>
+    <style>
+        h1{
+            text-align: center;
+        }
+        h2{
+            text-align: center;
+        }
+        form{
+            text-align: center;
+        }
+        div{
+            text-align: center;
+        }
+    </style>
+</head>
 <body>
     <h1>Send Meme!</h1>
     <form method="POST" action="/upload" enctype="multipart/form-data">
-        <input type="file" name="image">
+        nome do meme:<input type="text" name="memename"><br/><br/>
+        <input type="file" multiple id="gallery-photo-add"><br/><br/>
         <input type="submit" value="mandar meme">
     </form>
+    <h2>seu meme aqui:</h2>
+    <div class="gallery"></div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    $('#gallery-photo-add').on('change', function() {
+        imagesPreview(this, 'div.gallery');
+    });
+});
+    </script>
 </body>
 </html>
