@@ -2,7 +2,22 @@ const express = require('express')
 const app = express();
 const path = require('path')
 const fs = require('fs')
-const plvBan = require('./banedWord.json')
+const handlebars = require('express-handlebars')
+const Sequelize = require('sequelize')
+
+//config
+    //Templates
+        app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+        app.set('view engine', 'handlebars')
+        //bancosql
+        const sequelize = new Sequelize('admins', 'root', 'rossini135',{
+            host:"localhost",
+            dialect: "mysql"
+        })
+        //rotas
+        app.get('/cad', (req,res) =>{
+            res.send('rota de postagem')
+        })
 
 const multer = require('multer');
 const res = require('express/lib/response');
